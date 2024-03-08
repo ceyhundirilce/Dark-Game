@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Wall Decoration/fire2.png" type="Texture" id=1]
+[ext_resource path="res://Wall Decoration/fire3.png" type="Texture" id=2]
+[ext_resource path="res://Wall Decoration/fire1.png" type="Texture" id=3]
+[ext_resource path="res://Items/light.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( -8, -16, 8, -16, 8, 0, -8, 0 )
+
+[node name="FireWallDecoration" type="StaticBody2D"]
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 7
+frames = SubResource( 2 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -2.98023e-07, -4 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 4 )
+texture_scale = 0.05
+color = Color( 0.854902, 0.305882, 0.219608, 1 )
+range_item_cull_mask = 4
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 3 )
